@@ -30,3 +30,19 @@ resources = {
     "coffee": 100,
 }
 
+
+def prompt_menu():
+    item = input("What would you like? (espresso/latte/cappuccino): ")
+
+    if item not in MENU and item != 'off':
+        print("Sorry, we don't have that.")
+        return prompt_menu()
+
+    return item
+
+
+response = prompt_menu()
+
+if response == 'off':
+    print("Shutting down.")
+    exit()
