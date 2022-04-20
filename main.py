@@ -30,19 +30,35 @@ resources = {
     "coffee": 100,
 }
 
+money = 0
 
-def prompt_menu():
+
+def prompt():
     item = input("What would you like? (espresso/latte/cappuccino): ")
+    options = list(MENU.keys()) + ['off', 'report']
 
-    if item not in MENU and item != 'off':
-        print("Sorry, we don't have that.")
-        return prompt_menu()
+    if item not in options:
+        print("Sorry, invalid input.")
+        return prompt()
 
     return item
 
 
-response = prompt_menu()
-
-if response == 'off':
+def shutdown():
     print("Shutting down.")
     exit()
+
+
+def report(resource, money):
+    print("The coffee machine has:")
+    for key in resources:
+        print(f"{key}: {resources[key]}")
+
+    print(f"money: ${money}")
+
+
+match prompt():
+    case 'off':
+        shutdown()
+    case 'report':
+        report(resources, money)
