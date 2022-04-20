@@ -49,7 +49,7 @@ def shutdown():
     exit()
 
 
-def report(resource, money):
+def report(resources, money):
     print("The coffee machine has:")
     for key in resources:
         print(f"{key}: {resources[key]}")
@@ -57,8 +57,14 @@ def report(resource, money):
     print(f"money: ${money}")
 
 
-match prompt():
-    case 'off':
-        shutdown()
-    case 'report':
-        report(resources, money)
+
+def process_input(input):
+    match input:
+        case 'off':
+            shutdown()
+        case 'report':
+            report(resources, money)
+            process_input(prompt())
+
+
+process_input(prompt())
